@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>بصمة</title>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7378148163656165"
+crossorigin="anonymous"></script>
+
+<style>
+body {
+text-align:center;
+font-family:Arial;
+}
+
+.fingerprint {
+width:120px;
+height:120px;
+background:#eee;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:50px auto;
+font-size:40px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.fingerprint:active {
+transform:scale(0.9);
+background:#cce5ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>اضغط على البصمة 👇</h1>
+
+<div class="fingerprint" onclick="scan()">
+👆
+</div>
+
+<h2 id="result"></h2>
+
+<script>
+function scan(){
+let messages = [
+"تم التعرف عليك 🔓",
+"بصمة صحيحة ✔️",
+"مرحباً بك 👋",
+"تم الفتح بنجاح 🚀"
+];
+
+let random = Math.floor(Math.random()*messages.length);
+document.getElementById("result").innerHTML = messages[random];
+}
+</script>
+
+</body>
+</html>
