@@ -56,7 +56,131 @@ let messages = [
 let random = Math.floor(Math.random()*messages.length);
 document.getElementById("result").innerHTML = messages[random];
 }
+</<!DOCTYPE html>
+<html>
+<head>
+<title>Fingerprint Game</title>
+
+<style>
+body {
+text-align:center;
+font-family:Arial;
+}
+
+.fingerprint {
+width:130px;
+height:130px;
+background:#eee;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:40px auto;
+font-size:45px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.fingerprint:active {
+transform:scale(0.9);
+background:#cce5ff;
+}
+
+#game {
+display:none;
+margin-top:20px;
+}
+
+canvas {
+background:black;
+margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>👆 اضغط على البصمة</h1>
+
+<div class="fingerprint" onclick="scan()">
+👆
+</div>
+
+<h2 id="result"></h2>
+
+<!-- صوت -->
+<audio id="clickSound">
+<source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+</audio>
+
+<!-- اللعبة -->
+<div id="game">
+<h2>🐍 اللعبة بدأت</h2>
+<canvas id="snake" width="300" height="300"></canvas>
+</div>
+
+<script>
+function scan(){
+
+// صوت
+document.getElementById("clickSound").play();
+
+// اهتزاز
+if(navigator.vibrate){
+navigator.vibrate(150);
+}
+
+// رسالة
+let messages = [
+"تم التعرف عليك 🔓",
+"فتح ناجح ✔️",
+"مرحباً بك 👋"
+];
+
+let random = Math.floor(Math.random()*messages.length);
+document.getElementById("result").innerHTML = messages[random];
+
+// إظهار اللعبة
+document.getElementById("game").style.display = "block";
+
+// تشغيل اللعبة
+startGame();
+}
+
+/* ===== لعبة Snake بسيطة ===== */
+let canvas, ctx;
+let x = 150, y = 150;
+let dx = 10, dy = 0;
+
+function startGame(){
+canvas = document.getElementById("snake");
+ctx = canvas.getContext("2d");
+setInterval(draw, 100);
+document.addEventListener("keydown", move);
+}
+
+function draw(){
+ctx.fillStyle = "black";
+ctx.fillRect(0,0,300,300);
+
+x += dx;
+y += dy;
+
+ctx.fillStyle = "lime";
+ctx.fillRect(x,y,10,10);
+}
+
+function move(e){
+if(e.key == "ArrowUp"){ dx=0; dy=-10; }
+if(e.key == "ArrowDown"){ dx=0; dy=10; }
+if(e.key == "ArrowLeft"){ dx=-10; dy=0; }
+if(e.key == "ArrowRight"){ dx=10; dy=0; }
+}
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
